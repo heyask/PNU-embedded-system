@@ -14,11 +14,19 @@ project
 │   README.md  
 │
 └───[x]_week
-│   │   lecture # 강의자료
-│   │   project # 프로젝트파일
-│   │   report  # 보고서자료
+│   │   README.md        # 해당 주차 보고서
 │   │   
-│   └───screenshoots # 스크린샷
-│   ...
+│   └───lecture          # 강의자료
+│   │   │   .
+│   │   
+│   └───project          # 프로젝트파일
+│   │   │   .
+│   │   
+│   └───report           # 보고서자료
+│   │   │   .
+│   │   │
+│   │   └───screenshoots # 스크린샷
+│   │       │   .
+│   │   
 │   ...
 ```
