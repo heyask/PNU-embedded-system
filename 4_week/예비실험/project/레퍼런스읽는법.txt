@@ -1,0 +1,15 @@
+13¹ø
+1. RCC enable
+2. GPIOD2 output
+GPIO D2 reset
+3. GPIO D2 set
+
+0x40021000 + 0x18
+
+0x40021018 = 0x20
+0x40011400 = 0x100
+0x40011414 = 0x4
+0x40011410 = 0x4
+
+
+http://kangssu.com/wed07/post/2016-09-30-7%EC%A1%B0-5%EC%A3%BC%EC%B0%A8-%EC%8B%A4%ED%97%98.html
