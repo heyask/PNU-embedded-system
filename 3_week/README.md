@@ -7,7 +7,6 @@
 
 # 1. 개요
 
-
 ## 1.1 목표
 - 임베디드 시스템의 기본 원리 습득
 - 레지스터와 주소 제어를 통한 임베디드 펌웨어 개발 이해
@@ -32,19 +31,57 @@
    (조이스틱의 값 변화에 따른 LED 점등까지의 시간 측정, Digital Pin의 trigger를 이용하여 캡처)
 
 
-
-
-
-
-
-
 # 2. 세팅
-## 2.1 DS-5
-asdasd
+
+![0](./report/screenshots/0.png)
+
+
+![1](./report/screenshots/1.png)
+
+
+![2](./report/screenshots/2.png)
+
+
+![3](./report/screenshots/3.png)
+
+
+![4](./report/screenshots/4.png)
+
+
+![5](./report/screenshots/5.png)
+
+
+![6](./report/screenshots/6.png)
+
+
+![7](./report/screenshots/7.png)
+
+
+![8](./report/screenshots/8.png)
+
+
+![9](./report/screenshots/9.png)
+
+
+![10](./report/screenshots/10.png)
+
+
+![11](./report/screenshots/11.png)
+
+
+![12](./report/screenshots/12.png)
+
+
+![13](./report/screenshots/13.png)
+
+
+![14](./report/screenshots/14.png)
 
 
 # 3. 구현
 
 
+
 # 4. 결론
+
 
