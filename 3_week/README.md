@@ -100,6 +100,63 @@ RO base address와 RW base address에 SRAM의 메모리 주소를 입력한다.
 
 디버깅을 위해 보드 메모리에 업로드할 펌웨어파일(.axf)을 설정한다. 펌웨어파일은 .c로 코드를 작성하고 빌드하면 생성된다.
 
+
+# 레퍼런스 보는법
+## 흐름
+
+LED를 켜고끄기 위한 전체적인 순서는 아래와 같다.
+
+1. RCC(Reset and Clock Control) enable 
+   
+   GPIO핀의 클락을 맞춰주기 위해 RCC Register를 enable 한다
+
+2. GPIOx output 
+
+   GPIOx 핀을 output모드로 설정한다.
+
+3. GPIOx reset 
+
+   GPIOx 핀의 bit값을 초기값으로 reset을 한다.
+
+4. GPIOx set 
+
+   그 후 GPIOx 핀의 bit값을 원하는 값으로 set시킨다.
+
+
+## GPIO Register (General-purpose and alternate-function I/Os)
+
+![15](./report/screenshots/15.png)
+
+```GPIOx_CR<L,H> = 0x44444444;``` 로 주면 bit를 reset 할 수 있다. 
+
+```0x44444444```는 이진수로 ```0100 0100 0100 0100  0100 0100 0100 0100``` 이므로 
+
+위 레퍼런스 표를 보면 CNFx(2bit) MODE(2bit)로 비트값을 주는것 을 알 수 있다.
+
+
+![16](./report/screenshots/16.png)
+
+![17](./report/screenshots/17.png)
+
+MODE bit를 ```00``` 으로 주면 Input Mode가 되며 Input mode에서 CNF bit를 ```01``` 로 주면 reset state가 된다.
+
+
+![18](./report/screenshots/18.png)
+
+
+![19](./report/screenshots/19.png)
+
+
+![20](./report/screenshots/20.png)
+
+GPIOx_BRR 레지스터 bit에 1을주면 리셋,
+
+GPIOx_BSRR 레지스터 bit에 1을주어 ODRx bit를 set한다.
+
+GPIOx_BSRR 레지스터에 0을 주면 reset 하는게 아니라 "No Action", 즉 아무것도 하지 않는 것 이므로 착각하지 않도록 한다.
+
+
+
 # 구현
 
 ## 전체코드
@@ -140,7 +197,7 @@ int main()
 
 	GPIOD_BSRR = 0x00000000; // GPIOB bit reset
 
-	//GPIOD_BSRR |=  0x9C; // 참고코드 : GPIOD2,3,5,7 set
+	//GPIOD_BSRR |=  0x9C; // 참고코드 : GPIOD2,3,4,7 set
 	//GPIOD_BSRR =  0x0; // 참고코드 : 아무일도 일어나지 않음
 
 	int i = 0; // 현재 상태를 저장하는 변수
