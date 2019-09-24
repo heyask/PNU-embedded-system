@@ -98,10 +98,11 @@ RO base address와 RW base address에 SRAM의 메모리 주소를 입력한다.
 
 ![14](./report/screenshots/14.png)
 
-디버깅을 위해 보드 메모리에 업로드할 펌웨어파일(.axf)을 설정한다.
+디버깅을 위해 보드 메모리에 업로드할 펌웨어파일(.axf)을 설정한다. 펌웨어파일은 .c로 코드를 작성하고 빌드하면 생성된다.
 
 # 구현
 
+## 전체코드
 ``` c
 #include <time.h>
 
@@ -186,8 +187,9 @@ int main()
 		}
 	}
 }
-
 ```
+
+
 
 # 결론
 
