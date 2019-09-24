@@ -102,9 +102,6 @@ RO base address와 RW base address에 SRAM의 메모리 주소를 입력한다.
 
 # 구현
 
-![15](./report/screenshots/15.png)
-
-
 ``` c
 #include <time.h>
 
