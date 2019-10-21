@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Delete resource &apos;W4/Debug/_W4.axf&apos;" deleteContents="false" description="Delete resource &apos;W4/Debug/_W4.axf&apos;" element1="/W4/Debug/_W4.axf" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1569046318773"/>
-</session>

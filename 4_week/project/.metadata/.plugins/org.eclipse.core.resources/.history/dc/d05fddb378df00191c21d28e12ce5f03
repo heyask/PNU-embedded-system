@@ -1,0 +1,85 @@
+#define RCC_APB2_ENR *(volatile unsigned int *)0x40021018 // GPIO 핀의 클락 사용 레지스터
+
+#define GPIOD_CRL *(volatile unsigned int *)0x40011400 // GPIOD 0~7포트에 대한 입출력 사용 여부(GD2,3,4,7)
+#define GPIOD_CRH *(volatile unsigned int *)0x40011404 // GPIOD 8~15포트에 대한 입출력 사용 여부(GD11,12)
+#define GPIOD_BSRR *(volatile unsigned int *)0x40011410 // GPIOD에 대한 Bit Set, Reset Write
+#define GPIOD_BRR *(volatile unsigned int *)0x40011414 // GPIOD에 대한 Bit Reset 설정
+#define GPIOD_IDR *(volatile unsigned int *)0x40011408 // GPIOD에 대해 LOW, HIGH를 Read
+
+#define GPIOC_CRL *(volatile unsigned int *)0x40011000 // GPIOC 0~7포트에 대한 입출력 사용 여부(GB8)
+#define GPIOC_CRH *(volatile unsigned int *)0x40011004 // GPIOD 8~15포트에 대한 입출력 사용 여부(GD11,12)
+#define GPIOC_BSRR *(volatile unsigned int *)0x40011010 // GPIOC에 대한 Bit Set, Reset Write
+#define GPIOC_BRR *(volatile unsigned int *)0x40011014 // GPIOC에 대한 Bit Reset 설정
+#define GPIOC_IDR *(volatile unsigned int *)0x40011008 // GPIOC에 대해 LOW, HIGH를 Read
+
+#define GPIOB_CRL *(volatile unsigned int *)0x40010C00 // GPIOB 0~7포트에 대한 입출력 사용 여부(GB8)
+#define GPIOB_BSRR *(volatile unsigned int *)0x40010C10 // GPIOB에 대한 Bit Set, Reset Write
+#define GPIOB_BRR *(volatile unsigned int *)0x40010C14 // GPIOB에 대한 Bit Reset 설정
+#define GPIOB_IDR *(volatile unsigned int *)0x40010C08 // GPIOB에 대해 LOW, HIGH를 Read
+
+void delay(int n) // 일정 시간만큼 기다리는 함수
+{
+	int i;
+	for (i = 0;i < 100000 * n; i++);
+}
+
+int main()
+{
+	RCC_APB2_ENR = 0x3E; // GPIOB,D 핀의 클락 사용을 설정함
+
+	GPIOD_CRL = 0x44444444; // GPIOD reset
+	GPIOD_CRH = 0x44444444;
+	GPIOB_CRL = 0x44444444; // GPIOB reset
+
+	GPIOC_CRL = 0x44444444; // GPIOD reset
+	GPIOC_CRH = 0x44444444;
+	GPIOC_CRL = 0x44444444; // GPIOB reset
+
+	GPIOD_CRL = 0x10011100; // LED 부분인 GPIOD2,3,4,7을 output으로 설정함
+	GPIOD_CRH = 0x00044000; // button 부분인 GPIOD11~12를 input으로 설정함
+	GPIOB_CRL = 0x00000000; // button sel 부분인 GPIOB8을 input으로 설정함
+
+	GPIOD_BSRR = 0x00000000; // GPIOB bit reset
+
+	//GPIOD_BSRR |=  0x9C; // 참고코드 : GPIOD2,3,4,7 set
+	//GPIOD_BSRR =  0x0; // 참고코드 : 아무일도 일어나지 않음
+
+	int i = 0; // 현재 상태를 저장하는 변수
+
+	while (1) // 계속 반복
+	{
+		if (~GPIOD_IDR & 0x800) // 왼쪽 버튼을 눌렀을 때, GPIOD11이 0일 때
+			i = 1; // 상태를 1로 설정
+
+		if (~GPIOD_IDR & 0x1000) // 오른쪽 버튼을 눌렀을 때, GPIOD12가 0일 때
+			i = 2; // 상태를 2로 설정
+
+		if (~GPIOB_IDR & 0x100) // 조이스틱을 눌렀을 때, GPIOB8이 0일 때
+			i = 0; // 상태를 0으로 설정
+
+		switch (i) // 현재 상태에 대한 동작 설정
+		{
+		case 1: // 왼쪽 버튼을 눌렀을 때
+			GPIOD_BRR |= 0x9C; // GPIOD LED reset
+			GPIOD_BSRR |= 0x08; // GPIOD3 set
+			delay(10); // 잠시 기다림
+			GPIOD_BRR |= 0x9C; // GPIOD LED reset
+			GPIOD_BSRR |= 0x04; // GPIO2 set
+			delay(10); // 잠시 기다림
+			break;
+
+		case 2:
+			GPIOD_BRR |= 0x9C; // GPIOD LED reset
+			GPIOD_BSRR |= 0x80; // GPIOD7 set
+			delay(10); // 잠시 기다림
+			GPIOD_BRR |= 0x9C; // GPIOD LED reset
+			GPIOD_BSRR |= 0x10; // GPIO4 set
+			delay(10); // 잠시 기다림
+			break;
+
+		case 0:
+			GPIOD_BRR |= 0x9C; // GPIOD LED reset
+			break;
+		}
+	}
+}

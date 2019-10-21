@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;W4/Debug/W4.axf&apos; to &apos;_W4.axf&apos;" description="Rename resource &apos;W4.axf&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Debug/W4.axf" name="_W4.axf" stamp="1569046312902" updateReferences="true"/>
-</session>

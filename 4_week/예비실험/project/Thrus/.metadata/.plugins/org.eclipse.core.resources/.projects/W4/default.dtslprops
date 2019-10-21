@@ -1,5 +1,0 @@
-#Sat Sep 21 13:33:01 KST 2019
-options.cortexM3.coreTrace.Cortex_M3_0=true
-options.trace.traceCapture=none
-options.itm.ITM0=false
-options.cortexM3.coreTrace=false
